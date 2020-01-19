@@ -56,7 +56,7 @@ class Matrix{
 			}
 		}
 	}
-	static void write(Matrix omat,std::ofstream &ofp){
+	static void write(Matrix omat,std::ofstream &ofp){//ok
 		ofp<<omat.rows<<" "<<omat.cols;
 		ofp<<"\n";
 		for(int i=0;i<omat.rows;i++){
@@ -66,7 +66,7 @@ class Matrix{
 			ofp<<"\n";
 		}
 	}
-	static Matrix read(std::ifstream &ifp){
+	static Matrix read(std::ifstream &ifp){//ok
 		// read size
 		unsigned int nrows,ncols;
 		ifp>>nrows;
@@ -153,8 +153,6 @@ class Matrix{
 
 Matrix Matrix::map(Matrix other,long double (*f)(long double)){
 	Matrix newmat(other.rows,other.cols);
-	std::cout<<"in map";
-	other.print();
 	newmat.fill(0);
 	for(int i=0;i<newmat.rows;i++){
 			for(int j=0;j<newmat.cols;j++){
@@ -203,6 +201,7 @@ Matrix Matrix::operator*(Matrix omat){
 }
 Matrix Matrix::multiply(long double value){
 	Matrix mulmat(this->rows,this->cols);
+	mulmat.fill(0);
 	for(int i=0;i<mulmat.rows;i++){
 		for(int j=0;j<mulmat.cols;j++){
 			mulmat.mat[i][j] += this->mat[i][j]*value ; 
