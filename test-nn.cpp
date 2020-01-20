@@ -46,10 +46,7 @@ int main(){
             // evaluate
             tcorrect = 0.0;
             for(int i=0;i<data_size;i++){
-                preds = nn.predict(x[i]);
-                r = x[i].at(0,0);
-                g = x[i].at(1,0);
-                b = x[i].at(2,0); 
+                preds = NeuralNetwork::softmax(nn.predict(x[i]));
                 int index = -1;
                 //max 
                 if(preds.at(0,0)>preds.at(1,0)){
@@ -63,10 +60,6 @@ int main(){
             cout<<"`\taccuracy : "<<(double)((double)tcorrect/data_size)*100<<"%"<<endl;
             // train
             for(int i=0;i<data_size;i++){
-                r = x[i].at(0,0);
-                g = x[i].at(1,0);
-                b = x[i].at(2,0);
-
                 Matrix targets(2,1);
                 targets.fill(0);
                 targets.assign(y[i],0,1);

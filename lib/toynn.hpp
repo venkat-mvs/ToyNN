@@ -132,12 +132,18 @@ class NeuralNetwork{
         outputs = outputs + this->bias_o;
         outputs.map(this->activation_function.f);
 
+        return outputs;
+    }
+    static Matrix softmax(Matrix outputs){
+        if(outputs.getNCols() != 1){
+            throw ToyNNInputException("in softmax() the matrix should be nx1 size ",LOCATION);
+        }
         long double sum=0.0;
         outputs.map(expl);
-        for(int i=0;i<this->output_nodes;i++){
+        for(int i=0;i<outputs.getNRows();i++){
             sum+=outputs.at(i,0);
         }
-        for(int i=0;i<this->output_nodes;i++){
+        for(int i=0;i<outputs.getNRows();i++){
             outputs.assign(i,0,outputs.at(i,0)/sum);
         }
         return outputs;
